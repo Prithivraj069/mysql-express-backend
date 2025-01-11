@@ -14,3 +14,5 @@ GRANT ALL PRIVILEGES on sakila.* TO 'ahkow'@'localhost' WITH GRANT OPTION;
  ```
 FLUSH PRIVILEGES;
 ```
+npm init -y 
+npm install express hbs handlebars-helpers wax-on mysql2 dotenv
