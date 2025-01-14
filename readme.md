@@ -16,3 +16,10 @@ FLUSH PRIVILEGES;
 ```
 npm init -y 
 npm install express hbs handlebars-helpers wax-on mysql2 dotenv
+
+DB_HOST=localhost
+DB_USER=root
+DB_NAME=crm
+DB_PASSWORD=root123
+
+run - node index.js

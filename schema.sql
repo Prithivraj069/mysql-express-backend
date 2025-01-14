@@ -1,67 +1,75 @@
-CREATE DATABASE sibi_co;
+-- SQL Schema for Financial Advising Company
+CREATE DATABASE crm;
 
-USE sibi_co;
+USE crm;
 
-CREATE TABLE companies (
+-- Creating Companies Table
+CREATE TABLE Companies (
     company_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT
 );
 
-CREATE TABLE customers (
+-- Creating Customers Table
+CREATE TABLE Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     rating INT,
     company_id INT,
-    FOREIGN KEY (company_id) REFERENCES companies(company_id)
+    FOREIGN KEY (company_id) REFERENCES Companies(company_id)
 );
 
-CREATE TABLE  departments (
+-- Creating Departments Table
+CREATE TABLE Departments (
     department_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE employees (
+-- Creating Employees Table
+CREATE TABLE Employees (
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     department_id INT,
-    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
 );
 
-CREATE TABLE products (
+-- Creating Products Table
+CREATE TABLE Products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT
+    description TEXT,
+    active BOOLEAN
 );
 
-CREATE TABLE sales (
+-- Creating Sales Table
+CREATE TABLE Sales (
     sale_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
     employee_id INT,
     customer_id INT,
     quantity INT,
     sale_date DATE,
-    FOREIGN KEY (product_id) REFERENCES products(product_id),
-    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+    FOREIGN KEY (product_id) REFERENCES Products(product_id),
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
-CREATE TABLE employeeCustomer(
+-- Creating EmployeeCustomer Table
+CREATE TABLE EmployeeCustomer (
     employee_id INT,
     customer_id INT,
     PRIMARY KEY (employee_id, customer_id),
-    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
-    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
-CREATE TABLE employeeProduct (
+-- Creating EmployeeProduct Table
+CREATE TABLE EmployeeProduct (
     employee_id INT,
     product_id INT,
     PRIMARY KEY (employee_id, product_id),
-    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
-
-SHOW tables;
